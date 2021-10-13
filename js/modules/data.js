@@ -47,3 +47,5 @@ const similarPublicPhotos = Array.from({length: SIMILAR_PHOTO_COUNT}, createPubl
 // eslint-disable-next-line no-console
 console.log(similarPublicPhotos);
 
+export{similarPublicPhotos};
+
