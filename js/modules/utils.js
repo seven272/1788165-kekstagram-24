@@ -36,4 +36,9 @@ const checkingLengthString = (string, maxLength) => string.length <= maxLength;
 checkingLengthString('ф-я получениия случайного числа из заданного диапазона, включая мин и мак значения', 140);
 export {getRandomNumber, checkingLengthString, getRandomId};
 
+// ф-я закрытия окна при нажатий ESC
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export{isEscapeKey};
+
 

@@ -1,5 +1,6 @@
 import {similarPublicPhotos} from './data.js';
 import {getRandomNumber} from './utils.js';
+import {createPopup} from './popup.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const template = document.querySelector('#picture').content;
@@ -13,5 +14,11 @@ similarPublicPhotos.forEach((photo)=> {
   pictureElement.querySelector('.picture__comments').textContent = getRandomNumber(0, 40);
   fragment.appendChild(pictureElement);
 });
-
 picturesContainer.appendChild(fragment);
+
+
+const collectionMiniatures = document.querySelectorAll('.picture__img');
+
+collectionMiniatures.forEach((miniature) => {
+  miniature.addEventListener('click', createPopup);
+});
