@@ -44,8 +44,9 @@ const createPublickPhoto = () => ({
 
 
 const similarPublicPhotos = Array.from({length: SIMILAR_PHOTO_COUNT}, createPublickPhoto);
-// eslint-disable-next-line no-console
-console.log(similarPublicPhotos);
 
-export{similarPublicPhotos};
+//для тестирования попапа, потом удалить
+const popupBigPhoto = Array.from({length: 1}, createPublickPhoto);
 
+
+export{similarPublicPhotos, popupBigPhoto};

@@ -1,5 +1,6 @@
 import {similarPublicPhotos} from './data.js';
 import {getRandomNumber} from './utils.js';
+import {createPopup} from './popup.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const template = document.querySelector('#picture').content;
@@ -15,3 +16,9 @@ similarPublicPhotos.forEach((photo)=> {
 });
 
 picturesContainer.appendChild(fragment);
+
+//отображение попапа при клике на миниатюру
+const collectionMiniatures = document.querySelectorAll('.picture__img');
+collectionMiniatures.forEach((miniature) => {
+  miniature.addEventListener('click', createPopup);
+});
