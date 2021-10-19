@@ -30,7 +30,7 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" action="https://24.javascript.pages.academy/kekstagram" method="post" enctype="multipart/form-data" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -115,8 +115,11 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег"  maxlength="100"  title="только буквы и цифры">
+                  <!-- pattern="#*[а-яА-ЯёЁa-zA-Z0-9\s#]+" -->
+                  <!-- maxlength="140" -->
+                  <!-- pattern="^#+[а-яА-ЯёЁa-zA-Z0-9\s#]{1,100}" -->
+                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..." ></textarea>
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->

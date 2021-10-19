@@ -33,7 +33,10 @@ const getRandomId = (min, max) => {
 //ф-я проверки длины комментария: если длина стр меньше 140 - возвращается true, иначе false
 const checkingLengthString = (string, maxLength) => string.length <= maxLength;
 
+// ф-я закрытия окна при нажатий ESC
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 checkingLengthString('ф-я получениия случайного числа из заданного диапазона, включая мин и мак значения', 140);
-export {getRandomNumber, checkingLengthString, getRandomId};
+export {getRandomNumber, checkingLengthString, getRandomId, isEscapeKey };
 
 

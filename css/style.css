@@ -681,6 +681,16 @@ main {
   color: #000000;
 
   border-radius: 5px;
+  outline:none;
+}
+
+
+.text__hashtags:valid {
+  border: 1px solid green;
+}
+
+.text__hashtags:invalid {
+  border: 3px solid red;
 }
 
 .text__description {
@@ -695,6 +705,15 @@ main {
   color: #000000;
 
   border-radius: 5px;
+  outline:none;
+}
+
+.text__description:valid {
+  border: 1px solid green;
+}
+
+.text__description:invalid {
+  border: 3px solid red;
 }
 
 
