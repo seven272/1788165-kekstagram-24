@@ -36,7 +36,7 @@ const createPublickPhoto = () => ({
   likes: getRandomNumber(15, 200),
   comments: {
     id: RANDOM_COMMENT_ID(),
-    avatar: `img/avatar${getRandomNumber(1, 6)}.svg`,
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
     message: getRandomArrayElement(COMMENTS),
     name: getRandomArrayElement(NAMES),
   },

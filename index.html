@@ -115,8 +115,10 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                  <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег"   pattern="^#+[а-яА-ЯёЁa-zA-Z0-9\s#]{1,100}" title="только буквы и цифры">
+                  <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег"  maxlength="100"  title="только буквы и цифры">
+                  <!-- pattern="#*[а-яА-ЯёЁa-zA-Z0-9\s#]+" -->
                   <!-- maxlength="140" -->
+                  <!-- pattern="^#+[а-яА-ЯёЁa-zA-Z0-9\s#]{1,100}" -->
                   <textarea class="text__description" name="description" placeholder="Ваш комментарий..." ></textarea>
                 </fieldset>
 

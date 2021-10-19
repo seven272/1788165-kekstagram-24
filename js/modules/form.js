@@ -7,7 +7,7 @@ const buttonClose = document.querySelector('.img-upload__cancel');
 const hashtag = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
 const buttonSubmit = document.querySelector('.img-upload__submit');
-
+const regexp = /#+[\W+]/g;
 
 const openUpload = (evt) => {
   evt.preventDefault();
@@ -17,7 +17,7 @@ const openUpload = (evt) => {
 
 const closeUploadEsc = (evt) => {
   if (isEscapeKey(evt)) {
-    uploadOverlay.classList.toggle('hidden');
+    uploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
   }
 };
@@ -32,13 +32,13 @@ const closeUploadClick = () => {
 //выводим сообщения об ошибках в момент ввода пользователем хэштегов
 hashtag.addEventListener('input', () => {
   if(hashtag.value.length > 100) {
-    hashtag.setCustomValidity('Слишком длинный хэштег. Уберите лишние символы!');
+    hashtag.setCustomValidity('Вы ввели больше 100 символов. Удалите лишнии.');
     buttonSubmit.disabled = true;
   } else if(hashtag.value.length < 2) {
     hashtag.setCustomValidity('Слишком короткий хэштег. Добавьте символов!');
     buttonSubmit.disabled = true;
-  } else if (/[а-яА-ЯёЁa-zA-Z0-9\s#]/.test(hashtag.value) === false) {
-    hashtag.setCustomValidity('Использовать можно только буквы и цифры');
+  } else if (hashtag.value.search(regexp) !==-1) {
+    hashtag.setCustomValidity('Использовать можно только буквы и цифры. Исправьте хэштег');
     buttonSubmit.disabled = true;
   } else {
     hashtag.setCustomValidity('');
@@ -47,36 +47,44 @@ hashtag.addEventListener('input', () => {
   hashtag.reportValidity();
 });
 
+//проверяем длину и корректность символов каждого хэштега перед отправкой
+const checkLengthHashtag = (array) => {
+  array.forEach((element) => {
+    console.log(element);
+    if(element.length > 20) {
+      hashtag.setCustomValidity(`Слишком длинный хэштег ${element} Замените его!`);
+      console.log(`Слишком длинный хэштег ${element} Замените его!`);
+      buttonSubmit.disabled = true;
+      return;
+    }
+    else {
+      hashtag.setCustomValidity('');
+      buttonSubmit.disabled = false;
+    }
+    hashtag.reportValidity();
+  });
+};
 
-hashtag.addEventListener('click', () => {
-  console.log(hashtag.value);
+//форматирование введеных хэштегов и удаление дублей
+const checkHashtag = () => {
   const strValue = hashtag.value;
   const arrValue = strValue.split('#');
-  console.log(arrValue);
   if(arrValue[0] === '') {
     arrValue.shift();
   }
   while(arrValue.length > 5) {
     arrValue.pop();
   }
-  console.log(arrValue);
-  arrValue.forEach((element) => {
-    if(element.length > 20) {
-
-      console.log(`Слишком длинный хэштег ${element} Замените его!`);
-    }
-  });
-
+  //вызываем ф-ю проверки длины хэштега
+  checkLengthHashtag(arrValue);
   //проверяем на дубли и если такие встречаются сразу удаляем с помощью обьекта set, который затем преобразуем в массив с помощью array.from
   const arrSort = Array.from(new Set(arrValue));
-  console.log(arrSort);
+  //преобразуем массив в строку. Расставляем пробелы и #
+  let stringhashtag = arrSort.join(' #');
+  stringhashtag = `#${stringhashtag}`;
+  console.log(stringhashtag);
+};
 
-  //преобразуем массив в строку
-
-  let stringhashteag = arrSort.join(' #');
-  stringhashteag = `#${stringhashteag}`;
-  console.log(stringhashteag);
-});
 
 //поле ввода комментария
 const checkInputComment = () => {
@@ -110,3 +118,4 @@ document.addEventListener('keydown', closeUploadEsc);
 comment.addEventListener('input', checkInputComment);
 comment.addEventListener('keydown',clearInputs);
 hashtag.addEventListener('keydown', clearInputs);
+buttonSubmit.addEventListener('click', checkHashtag);
