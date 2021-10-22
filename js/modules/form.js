@@ -7,7 +7,8 @@ const buttonClose = document.querySelector('.img-upload__cancel');
 const hashtag = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
 const buttonSubmit = document.querySelector('.img-upload__submit');
-const regexp = /#+[\W+]/g;
+// const regexp = /#+[\W+]/g;
+const regexp =/^#[A-Za-zА-Яа-яЁё0-9\s#]{1,99}$/;
 
 const openUpload = (evt) => {
   evt.preventDefault();
@@ -37,7 +38,7 @@ hashtag.addEventListener('input', () => {
   } else if(hashtag.value.length < 2) {
     hashtag.setCustomValidity('Слишком короткий хэштег. Добавьте символов!');
     buttonSubmit.disabled = true;
-  } else if (hashtag.value.search(regexp) !==-1) {
+  } else if (hashtag.value.search(regexp) ===-1) {
     hashtag.setCustomValidity('Использовать можно только буквы и цифры. Исправьте хэштег');
     buttonSubmit.disabled = true;
   } else {
@@ -50,10 +51,10 @@ hashtag.addEventListener('input', () => {
 //проверяем длину и корректность символов каждого хэштега перед отправкой
 const checkLengthHashtag = (array) => {
   array.forEach((element) => {
-    console.log(element);
+    // console.log(element);
     if(element.length > 20) {
       hashtag.setCustomValidity(`Слишком длинный хэштег ${element} Замените его!`);
-      console.log(`Слишком длинный хэштег ${element} Замените его!`);
+      alert(`Слишком длинный хэштег ${element} Замените его!`);
       buttonSubmit.disabled = true;
       return;
     }
@@ -82,7 +83,7 @@ const checkHashtag = () => {
   //преобразуем массив в строку. Расставляем пробелы и #
   let stringhashtag = arrSort.join(' #');
   stringhashtag = `#${stringhashtag}`;
-  console.log(stringhashtag);
+  // console.log(stringhashtag);
 };
 
 
