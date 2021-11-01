@@ -37,6 +37,28 @@ const checkingLengthString = (string, maxLength) => string.length <= maxLength;
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 checkingLengthString('ф-я получениия случайного числа из заданного диапазона, включая мин и мак значения', 140);
-export {getRandomNumber, checkingLengthString, getRandomId, isEscapeKey };
+
+//создаем сообщение об ошибке при загрузке данных с сервера
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, 5000);
+};
+export {getRandomNumber, checkingLengthString, getRandomId, isEscapeKey,showAlert };
 
 

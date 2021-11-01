@@ -20,12 +20,16 @@ const closeUploadEsc = (evt) => {
   if (isEscapeKey(evt)) {
     uploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
+    hashtag.textContent = '';
+    comment.textContent = '';
   }
 };
 
 const closeUploadClick = () => {
   uploadOverlay.classList.toggle('hidden');
   body.classList.remove('modal-open');
+  hashtag.textContent = '';
+  comment.textContent = '';
 };
 
 //валидация
@@ -120,3 +124,98 @@ comment.addEventListener('input', checkInputComment);
 comment.addEventListener('keydown',clearInputs);
 hashtag.addEventListener('keydown', clearInputs);
 buttonSubmit.addEventListener('click', checkHashtag);
+
+
+//отправка данных
+const formSubmit = document.querySelector('.img-upload__form');
+const main = document.querySelector('main');
+const successMessage = document.querySelector('#success').content;
+const errorMessage = document.querySelector('#error').content;
+
+const buttonSuccess = successMessage.querySelector('.success__button');
+
+
+const addFormSubmit = (onSuccess, onError) => {
+  formSubmit.addEventListener('submit', (evt)=> {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://24.javascript.pages.academy/kekstagram1',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+      .then(() => {onSuccess()})
+      .catch(() => {
+        onError();
+        console.log('неудача');
+      });
+  });
+
+};
+
+
+//показ сообщения в случаи успешной загрузки формы
+const createSuccessMessage = () => {
+  const successWindow = successMessage.cloneNode(true);
+  main.appendChild(successWindow);
+  uploadOverlay.classList.toggle('hidden');
+  document.addEventListener('click', onClickWindowSucces);
+  document.addEventListener('keydown',onKeyDownSucces);
+};
+
+//закрываем сообщение об успешной загрузки формы
+const onClickWindowSucces = (evt) => {
+  const sectionSuccessMessage = document.querySelector('.success');
+  evt.preventDefault();
+  sectionSuccessMessage.remove();
+  console.log('кликаем по экрану');
+
+  document.removeEventListener('click', onClickWindowSucces);
+  document.removeEventListener('keydown', onKeyDownSucces);
+};
+
+const onKeyDownSucces = (evt) => {
+  const sectionSuccessMessage = document.querySelector('.success');
+  evt.preventDefault();
+  if (isEscapeKey(evt)) {
+    sectionSuccessMessage.remove();
+    console.log('нажали эскейп');
+    document.removeEventListener('click', onClickWindowSucces);
+    document.removeEventListener('keydown', onKeyDownSucces);
+  }
+
+};
+
+//показ сообщения в случаи ошибки загрузки формы
+const createErrorMessage = () => {
+  const errorWindow = errorMessage.cloneNode(true);
+  main.appendChild(errorWindow);
+  uploadOverlay.classList.toggle('hidden');
+  document.addEventListener('click', onClickWindowError);
+  document.addEventListener('keydown',onKeyDownError);
+};
+//закрываем сообщение об ошибке при загрузки формы
+const onClickWindowError = (evt) => {
+  const sectionErrorMessage = document.querySelector('.error');
+  evt.preventDefault();
+  sectionErrorMessage.remove();
+  console.log('кликаем по экрану');
+  document.removeEventListener('click', onClickWindowError);
+  document.removeEventListener('keydown', onKeyDownError);
+};
+
+const onKeyDownError = (evt) => {
+  const sectionErrorMessage = document.querySelector('.error');
+  evt.preventDefault();
+  if (isEscapeKey(evt)) {
+    sectionErrorMessage.remove();
+    console.log('нажали эскейп');
+    document.removeEventListener('click', onClickWindowError);
+    document.removeEventListener('keydown', onKeyDownError);
+  }
+};
+
+addFormSubmit(createSuccessMessage, createErrorMessage);
