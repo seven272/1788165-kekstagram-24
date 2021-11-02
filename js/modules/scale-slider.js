@@ -170,6 +170,14 @@ effects.addEventListener('change', (evt) => {
   hideSlider(target);
 });
 
+const resettingSettingsPicture = () => {
+  image.style.filter = 'none';
+  image.style.transform = 'scale(1)';
+  valueControl.value = 100;
+};
+
 //слушатели: масштаб изображения
 containerControles.addEventListener('click', changeScale);
 effects.addEventListener('click', changeEffects);
+
+export {resettingSettingsPicture};
