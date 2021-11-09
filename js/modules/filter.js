@@ -16,6 +16,7 @@ const sortPhotos = (evt) => {
   const buttonDiscussed = document.getElementById('filter-discussed');
   const picturesContainer = document.querySelector('.pictures');
   const miniatures = picturesContainer.querySelectorAll('.picture');
+  let arrayCopy = [];
   //меняем стиль у выбранной кнопки
   const changeStyleButton = (button) => {
     const buttons = document.querySelectorAll('.img-filters__button');
@@ -26,29 +27,32 @@ const sortPhotos = (evt) => {
 
   };
 
-  //сортируем миниатюры
-  if (target === buttonRandom ) {
-    const arrayCopy = dataMiniatures.slice();
-    const arrRandomTenPhotos = arrayCopy.sort(()=> 0.5 - Math.random()).slice(0, 10);
+  const copyArray = () => {
+    arrayCopy = dataMiniatures.slice();
+  };
+  const removeMiniatures = () => {
     miniatures.forEach((miniature) => {
       miniature.remove();
     });
+  };
+
+  //сортируем миниатюры
+  if (target === buttonRandom ) {
+    copyArray();
+    const arrRandomTenPhotos = arrayCopy.sort(()=> 0.5 - Math.random()).slice(0, 10);
+    removeMiniatures();
     createMiniatures(arrRandomTenPhotos);
     changeStyleButton(target);
 
   } else if (target === buttonDiscussed) {
-    const arrayCopy = dataMiniatures.slice();
+    copyArray();
     const arrPhotoComments = arrayCopy.sort((a,b)=> b.comments.length - a.comments.length);
-    miniatures.forEach((miniature) => {
-      miniature.remove();
-    });
+    removeMiniatures();
     createMiniatures(arrPhotoComments);
     changeStyleButton(target);
 
   } else if (target === buttonDefault) {
-    miniatures.forEach((miniature) => {
-      miniature.remove();
-    });
+    removeMiniatures();
     createMiniatures(dataMiniatures);
     changeStyleButton(target);
   }

@@ -4,9 +4,7 @@ import {isEscapeKey, checkingLengthString} from './utils.js';
 import {resettingSettingsPicture} from './scale-slider.js';
 
 const uploadOverlay = document.querySelector('.img-upload__overlay');
-const btnOpenUpload = document.querySelector('.img-upload__label');
 const body =document.querySelector('body');
-const buttonClose = document.querySelector('.img-upload__cancel');
 const hashtag = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
 const buttonSubmit = document.querySelector('.img-upload__submit');
@@ -16,28 +14,6 @@ const formSubmit = document.querySelector('.img-upload__form');
 const main = document.querySelector('main');
 const successMessage = document.querySelector('#success').content;
 const errorMessage = document.querySelector('#error').content;
-
-const openUpload = (evt) => {
-  // evt.preventDefault();
-  uploadOverlay.classList.toggle('hidden');
-  body.classList.add('modal-open');
-};
-
-const closeUploadEsc = (evt) => {
-  if (isEscapeKey(evt)) {
-    uploadOverlay.classList.add('hidden');
-    body.classList.remove('modal-open');
-    hashtag.textContent = '';
-    comment.textContent = '';
-  }
-};
-
-const closeUploadClick = () => {
-  uploadOverlay.classList.toggle('hidden');
-  body.classList.remove('modal-open');
-  hashtag.textContent = '';
-  comment.textContent = '';
-};
 
 //валидация
 
@@ -210,9 +186,6 @@ const resetInputAndPicture = () => {
 addFormSubmit(createSuccessMessage, createErrorMessage);
 
 //слушатели
-btnOpenUpload.addEventListener('click', openUpload);
-buttonClose.addEventListener('click', closeUploadClick);
-document.addEventListener('keydown', closeUploadEsc);
 comment.addEventListener('input', checkInputComment);
 comment.addEventListener('keydown',clearInputs);
 hashtag.addEventListener('keydown', clearInputs);
