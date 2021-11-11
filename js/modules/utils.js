@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-alert */
 'use strick';
 //ф-я получениия случайного числа из заданного диапазона, включая мин и мак значения. И заданы параметры по умолчанию.
 const getRandomNumber = (min = 0, max = 1) => {
@@ -12,7 +12,7 @@ const getRandomId = (min, max) => {
   return function () {
     let currentValue = getRandomNumber(min, max);
     if (arrID.length >= (max - min +1)) {
-      console.error(`Перебраны все числа из диапазона от ${  min  } до ${  max}`);
+      window.alert(`Перебраны все числа из диапазона от ${  min  } до ${  max}`);
       return null;
     }
     while(arrID.includes(currentValue)) {

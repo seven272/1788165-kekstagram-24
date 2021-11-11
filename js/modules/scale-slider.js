@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable radix */
-const smallerControl = document.querySelector('.scale__control--smaller');
-const biggerControl = document.querySelector('.scale__control--bigger');
 const valueControl = document.querySelector('.scale__control--value');
 const containerControles = document.querySelector('.scale');
 const image = document.querySelector('.img-upload__preview img');
