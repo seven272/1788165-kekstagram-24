@@ -1,13 +1,10 @@
-// import {similarPublicPhotos} from './data.js';
-// import {getRandomNumber} from './utils.js';
-import {createPopup} from './popup.js';
+import {compareId} from './popup.js';
 
 //отображение попапа при клике на миниатюру
 const clickMiniature = () => {
   const collectionMiniatures = document.querySelectorAll('.picture');
-
   collectionMiniatures.forEach((miniature) => {
-    miniature.addEventListener('click', createPopup);
+    miniature.addEventListener('click', compareId);
   });
 };
 
@@ -21,6 +18,9 @@ const createMiniatures = (miniatures) => {
     pictureElement.querySelector('.picture__img').src = `${photo.url}`;
     pictureElement.querySelector('.picture__likes').textContent = photo.likes;
     pictureElement.querySelector('.picture__comments').textContent = photo.comments.length;
+    //создаем дата-атрибуты для записи описания изображения
+    pictureElement.setAttribute('data-description', photo.description);
+    pictureElement.setAttribute('data-id', photo.id);
     fragment.appendChild(pictureElement);
   });
   picturesContainer.appendChild(fragment);

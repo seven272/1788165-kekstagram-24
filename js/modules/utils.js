@@ -6,9 +6,6 @@ const getRandomNumber = (min = 0, max = 1) => {
   const randomNumber = (min >=0 && max >=0 && max > min) ? Math.floor(Math.random() * (max - min + 1)) + min : alert('Укажите корректное значение');
   return randomNumber;
 };
-
-// getRandomNumber (10, 20);
-
 //делаем, чтобы случайные числа из заданного диапазона не повторялись. замыкание.
 const getRandomId = (min, max) => {
   const arrID = [];
@@ -26,9 +23,6 @@ const getRandomId = (min, max) => {
   };
 
 };
-
-//  let random = getRandomId(1,3);
-//  console.log(random())
 
 //ф-я проверки длины комментария: если длина стр меньше 140 - возвращается true, иначе false
 const checkingLengthString = (string, maxLength) => string.length <= maxLength;

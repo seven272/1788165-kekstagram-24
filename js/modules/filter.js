@@ -1,6 +1,6 @@
 import { dataMiniatures } from '../main.js';
 import {createMiniatures} from './miniatures.js';
-import {debounce} from '../utils/debounce.js';
+import {debounce} from './utils/debounce.js';
 
 const filter = document.querySelector('.img-filters');
 //показываем блок с кнопками сортировки после загрузки данных
