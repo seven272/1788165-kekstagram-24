@@ -4,7 +4,6 @@ import {isEscapeKey, checkingLengthString} from './utils.js';
 import {resettingSettingsPicture} from './scale-slider.js';
 
 const uploadOverlay = document.querySelector('.img-upload__overlay');
-const body =document.querySelector('body');
 const hashtag = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
 const buttonSubmit = document.querySelector('.img-upload__submit');
