@@ -76,11 +76,11 @@ valueElement.value = 1;
 
 //ф-я скрытия слайдера если выбрана миниаютра "оригинал"
 const hideSlider = (element) => {
-  const divSlider = document.querySelector('.effect-level__slider');
+  const effectLevel = document.querySelector('.effect-level');
   if(element.value === 'none') {
-    divSlider.classList.add('hidden');
+    effectLevel.classList.add('hidden');
   } else {
-    divSlider.classList.remove('hidden');
+    effectLevel.classList.remove('hidden');
   }
 };
 
@@ -133,6 +133,7 @@ effects.addEventListener('change', (evt) => {
           min: 0,
           max: 1,
         },
+        start: 1,
         step: 0.1,
       });
       break;
@@ -143,18 +144,22 @@ effects.addEventListener('change', (evt) => {
           min: 0,
           max: 100,
         },
+        start:100,
         step: 1,
       });
       break;
+
     case 'phobos':
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
           max: 3,
         },
+        start: 3,
         step: 0.1,
       });
       break;
+
     default:
       sliderElement.noUiSlider.updateOptions({
         range: {
@@ -166,6 +171,7 @@ effects.addEventListener('change', (evt) => {
   }
   //вызов ф-й скпытия слайдера
   hideSlider(target);
+  // sliderElement.noUiSlider.destroy();
 });
 
 const resettingSettingsPicture = () => {
@@ -178,4 +184,4 @@ const resettingSettingsPicture = () => {
 containerControles.addEventListener('click', changeScale);
 effects.addEventListener('click', changeEffects);
 
-export {resettingSettingsPicture};
+export {resettingSettingsPicture, hideSlider};

@@ -3,6 +3,7 @@ import './modules/form.js';
 import './modules/scale-slider.js';
 import './modules/filter.js';
 import './modules/load-image.js';
+import './modules/validate-form.js';
 
 import {createMiniatures} from './modules/miniatures.js';
 import {showAlert} from './modules/utils.js';
