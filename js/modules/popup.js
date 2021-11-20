@@ -17,6 +17,7 @@ let count = COMMENTS_QUANTITY;
 const countComments = (quantityComments) => {
   if(quantityComments.length < 5) {
     numberShowComments.textContent = `${quantityComments.length}`;
+    commentLoader.classList.add('hidden');
   } else if (quantityComments.length >= 5 ) {
     numberShowComments.textContent = count;
   }

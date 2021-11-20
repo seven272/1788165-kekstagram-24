@@ -30,7 +30,7 @@ const closeUploadEsc = (evt) => {
     previewImage.src = IMG_SRC;
     effectNone.checked = true;
     previewImage.style = '';
-    previewImage.className('effects__preview--none');
+    previewImage.classList.toggle('effects__preview--none');
   }
 };
 
