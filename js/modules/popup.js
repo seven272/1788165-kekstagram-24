@@ -56,7 +56,7 @@ const showOtherComments = () => {
   const listAllComments = document.querySelectorAll('.social__comment');
   countComments(listAllComments);
   for(let i = COMMENTS_QUANTITY; i < listAllComments.length;i++) {
-    if (i >= COMMENTS_QUANTITY) {
+    if (i > COMMENTS_QUANTITY) {
       listAllComments[i].classList.add('hidden');
     }
   }
@@ -109,11 +109,7 @@ const onClickButtonClose = () => {
 
 const onEscClose = (evt) => {
   if (isEscapeKey(evt)) {
-    bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
-    commentsBlock.innerHTML='';
-    count = COMMENTS_QUANTITY;
-    commentLoader.classList.remove('hidden');
+    closePopup();
   }
 };
 

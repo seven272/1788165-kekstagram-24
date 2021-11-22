@@ -1,11 +1,10 @@
 /* eslint-disable no-alert */
-
+const TIME_SHOW_MESSAGE = 5000;
+const alertContainer = document.createElement('div');
 // ф-я закрытия окна при нажатий ESC
 const isEscapeKey = (evt) => evt.key === 'Escape';
 //создаем сообщение об ошибке при загрузке данных с сервера
 const showAlert = (message) => {
-  const TIME_SHOW_MESSAGE = 5000;
-  const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
   alertContainer.style.position = 'absolute';
   alertContainer.style.left = 0;

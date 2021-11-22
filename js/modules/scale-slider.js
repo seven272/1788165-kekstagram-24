@@ -179,7 +179,7 @@ effects.addEventListener('change', (evt) => {
 const resettingSettingsPicture = () => {
   image.style.filter = 'none';
   image.style.transform = 'scale(1)';
-  valueControl.value = 100;
+  valueControl.value = SCALE_CONTROL_MAX;
 };
 
 //слушатели: масштаб изображения
