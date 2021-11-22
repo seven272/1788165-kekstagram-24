@@ -16,7 +16,7 @@ const sortPhotos = (evt) => {
   const buttonDiscussed = document.getElementById('filter-discussed');
   const picturesContainer = document.querySelector('.pictures');
   const miniatures = picturesContainer.querySelectorAll('.picture');
-  let arrayCopy = [];
+  let arrayCopyMiniatures = [];
   //меняем стиль у выбранной кнопки
   const changeStyleButton = (button) => {
     const buttons = document.querySelectorAll('.img-filters__button');
@@ -28,7 +28,7 @@ const sortPhotos = (evt) => {
   };
 
   const copyArray = () => {
-    arrayCopy = dataMiniatures.slice();
+    arrayCopyMiniatures = dataMiniatures.slice();
   };
   const removeMiniatures = () => {
     miniatures.forEach((miniature) => {
@@ -39,14 +39,14 @@ const sortPhotos = (evt) => {
   //сортируем миниатюры
   if (target === buttonRandom ) {
     copyArray();
-    const arrRandomTenPhotos = arrayCopy.sort(()=> 0.5 - Math.random()).slice(0, 10);
+    const arrRandomTenPhotos = arrayCopyMiniatures.sort(()=> 0.5 - Math.random()).slice(0, 10);
     removeMiniatures();
     createMiniatures(arrRandomTenPhotos);
     changeStyleButton(target);
 
   } else if (target === buttonDiscussed) {
     copyArray();
-    const arrPhotoComments = arrayCopy.sort((a,b)=> b.comments.length - a.comments.length);
+    const arrPhotoComments = arrayCopyMiniatures.sort((a,b)=> b.comments.length - a.comments.length);
     removeMiniatures();
     createMiniatures(arrPhotoComments);
     changeStyleButton(target);

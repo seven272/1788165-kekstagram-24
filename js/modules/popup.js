@@ -6,7 +6,7 @@ const bigPictureImg = bigPicture.querySelector('.big-picture__img');
 const image = bigPictureImg.querySelector('img');
 const likes = bigPicture.querySelector('.likes-count');
 const buttonClosePopup = bigPicture.querySelector('#picture-cancel');
-const body = document.querySelector('body');
+const body = document.body;
 const descriptionPicture = bigPicture.querySelector('.social__caption');
 const commentsBlock = bigPicture.querySelector('.social__comments');
 const commentLoader = bigPicture.querySelector('.comments-loader');
@@ -36,7 +36,7 @@ const showPopup = (obj) => {
 const onClickButtonCommentLoader = (evt) => {
   evt.preventDefault();
   const listAllComments = document.querySelectorAll('.social__comment');
-  count += 5;
+  count += COMMENTS_QUANTITY;
   for(let i = 0; i < listAllComments.length;i++) {
     if (i < count) {
       listAllComments[i].classList.remove('hidden');
@@ -55,7 +55,7 @@ const onClickButtonCommentLoader = (evt) => {
 const showOtherComments = () => {
   const listAllComments = document.querySelectorAll('.social__comment');
   countComments(listAllComments);
-  for(let i = 0; i < listAllComments.length;i++) {
+  for(let i = COMMENTS_QUANTITY; i < listAllComments.length;i++) {
     if (i >= COMMENTS_QUANTITY) {
       listAllComments[i].classList.add('hidden');
     }
@@ -84,7 +84,7 @@ const createComments = (listComments) => {
 
 };
 
-const compareId = (evt) => {
+const onCompareId = (evt) => {
   const target = evt.target;
   const parent = target.closest('.picture');
   dataMiniatures.forEach((element)=> {
@@ -95,15 +95,19 @@ const compareId = (evt) => {
   });
 };
 
-const clickButtonClose = () => {
-  bigPicture.classList.toggle('hidden');
+const closePopup = ()=> {
+  bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
   commentsBlock.innerHTML='';
   count = COMMENTS_QUANTITY;
   commentLoader.classList.remove('hidden');
 };
 
-const escClose = (evt) => {
+const onClickButtonClose = () => {
+  closePopup();
+};
+
+const onEscClose = (evt) => {
   if (isEscapeKey(evt)) {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -113,7 +117,7 @@ const escClose = (evt) => {
   }
 };
 
-document.addEventListener('keydown', escClose);
-buttonClosePopup.addEventListener('click', clickButtonClose);
+document.addEventListener('keydown', onEscClose);
+buttonClosePopup.addEventListener('click', onClickButtonClose);
 
-export {compareId};
+export {onCompareId};

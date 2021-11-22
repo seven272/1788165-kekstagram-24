@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-unused-vars */
-import {isEscapeKey, checkingLengthString} from './utils.js';
+import {isEscapeKey} from './utils.js';
 import {resettingSettingsPicture} from './scale-slider.js';
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const hashtag = document.querySelector('.text__hashtags');
@@ -18,7 +18,7 @@ const addFormSubmit = (onSuccess, onError) => {
     const formData = new FormData(evt.target);
 
     fetch(
-      'https://24.javascript.pages.academy/kekstagram',
+      'https://24.javascript.pages.academy/kekstagram99',
       {
         method: 'POST',
         body: formData,
@@ -50,6 +50,7 @@ const onClickWindowSucces = (evt) => {
   const sectionSuccessMessage = document.querySelector('.success');
   evt.preventDefault();
   sectionSuccessMessage.remove();
+  document.body.style.overflowY='auto';
   document.removeEventListener('click', onClickWindowSucces);
   document.removeEventListener('keydown', onKeyDownSucces);
 
@@ -60,6 +61,7 @@ const onKeyDownSucces = (evt) => {
   evt.preventDefault();
   if (isEscapeKey(evt)) {
     sectionSuccessMessage.remove();
+    document.body.style.overflowY='auto';
     document.removeEventListener('click', onClickWindowSucces);
     document.removeEventListener('keydown', onKeyDownSucces);
   }
@@ -80,6 +82,7 @@ const onClickWindowError = (evt) => {
   const sectionErrorMessage = document.querySelector('.error');
   evt.preventDefault();
   sectionErrorMessage.remove();
+  document.body.style.overflowY='auto';
   document.removeEventListener('click', onClickWindowError);
   document.removeEventListener('keydown', onKeyDownError);
 };
@@ -89,6 +92,7 @@ const onKeyDownError = (evt) => {
   evt.preventDefault();
   if (isEscapeKey(evt)) {
     sectionErrorMessage.remove();
+    document.body.style.overflowY='auto';
     document.removeEventListener('click', onClickWindowError);
     document.removeEventListener('keydown', onKeyDownError);
   }

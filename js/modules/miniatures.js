@@ -1,10 +1,10 @@
-import {compareId} from './popup.js';
+import {onCompareId} from './popup.js';
 
 //отображение попапа при клике на миниатюру
 const clickMiniature = () => {
   const collectionMiniatures = document.querySelectorAll('.picture');
   collectionMiniatures.forEach((miniature) => {
-    miniature.addEventListener('click', compareId);
+    miniature.addEventListener('click', onCompareId);
   });
 };
 

@@ -1,19 +1,24 @@
 import { isEscapeKey } from './utils.js';
-// import { hideSlider } from './scale-slider.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const IMG_SRC = 'img/upload-default-image.jpg';
-const fileChooser = document.querySelector('.img-upload__input');
-const previewContainer = document.querySelector('.img-upload__preview');
-const previewImage = previewContainer.querySelector('img');
-const preview = previewContainer.querySelector('img');
+const Picture = {
+  WIDTH: 600,
+  HEIGHT: 600,
+};
+const fileDownload = document.querySelector('.img-upload__input');
+//openUploadForm
+const sliderElement = document.querySelector('.effect-level');
+const body = document.body;
 const uploadOverlay = document.querySelector('.img-upload__overlay');
-const body = document.querySelector('body');
+//closeForm
 const hashtag = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
 const buttonClose = document.querySelector('.img-upload__cancel');
 const effectNone = document.querySelector('#effect-none');
-const sliderElement = document.querySelector('.effect-level');
+const previewContainer = document.querySelector('.img-upload__preview');
+const previewImage = previewContainer.querySelector('img');
+
 
 const openUploadForm = () => {
   uploadOverlay.classList.toggle('hidden');
@@ -21,21 +26,8 @@ const openUploadForm = () => {
   sliderElement.classList.add('hidden');
 };
 
-const closeUploadEsc = (evt) => {
-  if (isEscapeKey(evt)) {
-    uploadOverlay.classList.add('hidden');
-    body.classList.remove('modal-open');
-    hashtag.textContent = '';
-    comment.textContent = '';
-    previewImage.src = IMG_SRC;
-    effectNone.checked = true;
-    previewImage.style = '';
-    previewImage.classList.toggle('effects__preview--none');
-  }
-};
-
-const closeUploadClick = () => {
-  uploadOverlay.classList.toggle('hidden');
+const closeForm = () => {
+  uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   hashtag.textContent = '';
   comment.textContent = '';
@@ -45,17 +37,33 @@ const closeUploadClick = () => {
   effectNone.checked = true;
 };
 
-const loadNewImage = () => {
-  const file = fileChooser.files[0];
-  const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+const onCloseUploadEsc = (evt) => {
+  if (isEscapeKey(evt)) {
+    closeForm();
+  }
+};
 
+const onCloseUploadClick = () => {
+  closeForm();
+};
+
+const onLoadNewImage = () => {
+  const imgFile = fileDownload.files[0];
+  const imgName = imgFile.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => imgName.endsWith(it));
   if (matches) {
-    preview.src = URL.createObjectURL(file);
+    const reader = new FileReader();
+    const onReaderLoad = () => {
+      previewImage.src = reader.result;
+      previewImage.width = Picture.WIDTH;
+      previewImage.height = Picture.HEIGHT;
+    };
+    reader.addEventListener('load', onReaderLoad);
+    reader.readAsDataURL(imgFile);
   }
   openUploadForm();
 };
 
-fileChooser.addEventListener('change', loadNewImage);
-buttonClose.addEventListener('click', closeUploadClick);
-document.addEventListener('keydown', closeUploadEsc);
+fileDownload.addEventListener('change', onLoadNewImage);
+buttonClose.addEventListener('click', onCloseUploadClick);
+document.addEventListener('keydown', onCloseUploadEsc);

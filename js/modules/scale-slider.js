@@ -1,14 +1,5 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable radix */
-const valueControl = document.querySelector('.scale__control--value');
-const containerControles = document.querySelector('.scale');
-const image = document.querySelector('.img-upload__preview img');
-const effects = document.querySelector('.img-upload__effects');
-//слайдер
-const sliderElement = document.querySelector('.effect-level__slider');
-const valueElement = document.querySelector('.effect-level__value');
-
-
 const listEffects = {
   chrome: 'effects__preview--chrome',
   sepia: 'effects__preview--sepia',
@@ -18,25 +9,39 @@ const listEffects = {
   none: 'effects__preview--none',
 };
 
+const SCALE_CONTROL_MIN = 25;
+const SCALE_CONTROL_MAX = 100;
+const SCALE_CONTROL_STEP = 25;
+const VALUE_DEFAULT = 1;
+
+
+const valueControl = document.querySelector('.scale__control--value');
+const containerControles = document.querySelector('.scale');
+const image = document.querySelector('.img-upload__preview img');
+const effects = document.querySelector('.img-upload__effects');
+//слайдер
+const sliderElement = document.querySelector('.effect-level__slider');
+const valueElement = document.querySelector('.effect-level__value');
+
 //меняем масштаб изображения и значение value
-const changeScale = (evt) => {
+const onChangeScale = (evt) => {
   const target = evt.target;
 
   let value = parseInt(valueControl.value);
-  let hiddenValue = 100;
+  let hiddenValue = SCALE_CONTROL_MAX;
 
   if (target.classList.contains('scale__control--smaller')) {
-    if(value > 25) {
-      value -= 25;
+    if(value > SCALE_CONTROL_MIN) {
+      value -= SCALE_CONTROL_STEP;
       valueControl.value = `${value}%`;
       image.style.transform = `scale(0.${value})`;
     }
   } else if (target.classList.contains('scale__control--bigger')) {
-    if(value < 100) {
-      value += 25;
+    if(value < SCALE_CONTROL_MAX) {
+      value += SCALE_CONTROL_STEP;
       valueControl.value = `${value}%`;
       image.style.transform = `scale(0.${value})`;
-      if(value === 100) {
+      if(value === SCALE_CONTROL_MAX) {
         image.style.transform = 'scale(1)';
       }
     }
@@ -46,7 +51,7 @@ const changeScale = (evt) => {
 };
 
 //при клике на миниатюру меняем эффект большой фотографии
-const changeEffects = (evt) => {
+const onChangeEffects = (evt) => {
   const target = evt.target;
   switch(target.value) {
     case 'chrome':
@@ -72,7 +77,7 @@ const changeEffects = (evt) => {
 
 //слайдер
 //Значение по умолчанию
-valueElement.value = 1;
+valueElement.value = VALUE_DEFAULT;
 
 //ф-я скрытия слайдера если выбрана миниаютра "оригинал"
 const hideSlider = (element) => {
@@ -181,7 +186,7 @@ const resettingSettingsPicture = () => {
 };
 
 //слушатели: масштаб изображения
-containerControles.addEventListener('click', changeScale);
-effects.addEventListener('click', changeEffects);
+containerControles.addEventListener('click', onChangeScale);
+effects.addEventListener('click', onChangeEffects);
 
 export {resettingSettingsPicture, hideSlider};

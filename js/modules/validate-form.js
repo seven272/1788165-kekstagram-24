@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import {checkingLengthString} from './utils.js';
 const LATTICE = '#';
 const MIN_LENGTH_HASHTAG = 2;
 const MAX_LENGTH_HASHTAG = 20;
@@ -56,7 +54,7 @@ const verificationHashtag = () => {
 //проверка поля комментария
 const checkInputComment = () => {
   const MAX_LENGTH = 140;
-  if(checkingLengthString(comment.value, MAX_LENGTH) === false) {
+  if(comment.value.length > MAX_LENGTH) {
     comment.setCustomValidity(`Слишком длинный комметарий. Уберите лишние символы в количестве ${comment.value.length - MAX_LENGTH} шт`);
     buttonSubmit.disabled = true;
   } else {
