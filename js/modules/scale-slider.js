@@ -28,7 +28,6 @@ const onChangeScale = (evt) => {
   const target = evt.target;
 
   let value = parseInt(valueControl.value);
-  let hiddenValue = SCALE_CONTROL_MAX;
 
   if (target.classList.contains('scale__control--smaller')) {
     if(value > SCALE_CONTROL_MIN) {
@@ -46,8 +45,6 @@ const onChangeScale = (evt) => {
       }
     }
   }
-  //записываем масштаб в скрытое поле
-  hiddenValue = value;
 };
 
 //при клике на миниатюру меняем эффект большой фотографии
